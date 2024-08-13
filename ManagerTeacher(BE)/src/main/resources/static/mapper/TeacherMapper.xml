@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.managerteacher.mapper.TeacherMapper">
+    <resultMap id="Teacher" type="com.example.managerteacher.entity.Teacher">
+        <result column="Teacher_ID" property="teacherID"/>
+        <result column="Last_Name" property="lastName"/>
+        <result column="First_Name" property="firstName"/>
+        <result column="Teacher_Type" property="teacherType"/>
+        <result column="Qualification" property="qualification"/>
+        <result column="Base_Salary" property="baseSalary"/>
+        <result column="Employment_Date" property="employmentDate"/>
+        <result column="Employment_Status" property="employmentStatus"/>
+        <result column="image" property="image"/>
+    </resultMap>
+
+    <select id="findAllTeacher" resultMap="Teacher">
+        SELECT Teacher_ID,
+               Last_Name,
+               First_Name,
+               Teacher_Type,
+               Qualification,
+               Base_Salary,
+               Employment_Date,
+               Employment_Status,
+               Image
+        FROM Teachers
+    </select>
+    <insert id="insert" parameterType="com.example.managerteacher.entity.Teacher">
+        INSERT INTO Teachers (Teacher_ID,
+                              Last_Name,
+                              First_Name,
+                              Teacher_Type,
+                              Qualification,
+                              Base_Salary,
+                              Employment_Date,
+                              Employment_Status,
+                              Image)
+        VALUES
+            (#{teacherID} ,
+             #{lastName},
+             #{firstName},
+             #{teacherType},
+             #{qualification},
+             #{baseSalary},
+             #{employmentDate},
+             #{employmentStatus},
+             #{image})
+    </insert>
+    <delete id="delete" parameterType="String">
+        delete from Teachers
+               where Teacher_ID = #{TeacherID}
+    </delete>
+    <update id="update" parameterType="com.example.managerteacher.entity.Teacher">
+        UPDATE Teachers
+        SET Last_Name = #{lastName},
+            First_Name = #{firstName},
+            Teacher_Type = #{teacherType},
+            Qualification = #{qualification},
+            Base_Salary = #{baseSalary},
+            Employment_Date = #{employmentDate},
+            Employment_Status = #{employmentStatus},
+            Image = #{image}
+        WHERE Teacher_ID = #{teacherID}
+    </update>
+</mapper>
